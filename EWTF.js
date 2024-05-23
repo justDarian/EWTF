@@ -60,16 +60,15 @@ function connect() {
   ws.onclose = function () {
     connected = false
     console.log("EWTF: Disconnected");
+    // auto reconnected v2!?
+    connect()
   };
 }
 // auto connect cuz yeaa!! (im going to shoot myself <3)
 connect()
-setInterval(() => {
-  if (!connected) connect()
-}, 1500);
-function sendData(data) {
+function sendData(thing) {
   if (connected) {
-    ws.send(JSON.stringify(data)+"\n") // sends the data to the ws with a newline at the end
+    ws.send(JSON.stringify(thing)+"\n") // sends the data to the ws with a newline at the end
     return true;
   } else {
     return false;
